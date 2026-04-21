@@ -1,5 +1,5 @@
 import turtle
-from random import sample, choice
+from random import sample, choice, uniform, randint, random
 from time import perf_counter
 
 colors = [
@@ -87,11 +87,34 @@ def draw_custom_spiral(
 
         return distance_drawn, turn_count
 
+def _get_random_args() -> dict[str, float]:
+    r_limit = uniform(200, 1001)
+    r_start = uniform(0.0000001, 1.1)
+    r_sample_size = randint(1,10)
+    r_thickness = uniform(0, 2)
+    r_initial_heading = uniform(0,360)
+    r_rotation_angle = uniform(0,360)
+    r_growth_rate = random()
+
+    keys = ["Stroke Length Limit", "Initial Stroke Size", "Palette Sample Size", "Initial Thickness", "Initial Heading",
+            "Rotation Angle", "Growth Rate"]
+
+    vals = [r_limit, r_start, r_sample_size, r_thickness, r_initial_heading, r_rotation_angle, r_growth_rate]
+
+    return dict(zip(keys, vals))
+
 def main():
     try:
         setup()
+        args = _get_random_args()
+        print("---------RANDOMLY CHOSEN PARAMETERS---------")
+
+        for param in args:
+            print(param + ": " + str(args[param]))
+
+        print()
         start = perf_counter()
-        distance, n_turns = draw_custom_spiral(length_limit=700, rotation_angle=91)
+        distance, n_turns = draw_custom_spiral(*args.values()) #sample run
         end = perf_counter()
         time_taken = end - start
 
