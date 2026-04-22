@@ -110,8 +110,8 @@ def main():
         args = _get_random_args()
         print("---------RANDOMLY CHOSEN PARAMETERS---------")
 
-        for param in args:
-            print(param + ": " + str(args[param]))
+        for param, value in args.items():
+            print(f"{param}: {value:.4f}")
 
         print()
         start = perf_counter()
