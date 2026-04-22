@@ -55,13 +55,14 @@ def draw_custom_spiral(
         rotation_angle: float = 20,
         growth_rate: float = 0.1
 ):
-        validate_params(length_limit,
-                        length,
-                        sample_size,
-                        thickness,
-                        rotation_angle,
-                        growth_rate
-                        )
+        validate_params(
+            length_limit,
+            length,
+            sample_size,
+            thickness,
+            rotation_angle,
+            growth_rate
+        )
 
         t.setheading(initial_heading)
         distance_drawn = 0
