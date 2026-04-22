@@ -1,36 +1,34 @@
-import customtkinter as ctk
+import turtle
 
-ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("blue")
+from arguments import parse_args
+from drawing import draw_custom_spiral, setup
+from time import perf_counter
+
+screen = turtle.Screen()
 
 def main():
-    root = ctk.CTk()
-    root.title("Spiral Generator")
-    root.geometry("1200x700")
+    try:
+        setup(screen)
+        cl_args = parse_args()
+        print()
+        start = perf_counter()
+        distance, n_turns = draw_custom_spiral(**vars(cl_args))
+        screen.update()
+        end = perf_counter()
+        time_taken = end - start
 
-    left_panel = ctk.CTkFrame(root, width=300)
-    left_panel.pack(side = "left", fill = "y", padx=10, pady=10)
+        print("-------------METRICS----------------")
+        print(f"Distance travelled: {distance:.4f} pixels")
+        print(f"Number of turns during drawing: {n_turns}")
+        print(f"Average drawing speed: {(distance / time_taken):.4f} px/s")
 
-    right_panel = ctk.CTkFrame(root)
-    right_panel.pack(side=ctk.RIGHT, fill=ctk.BOTH, expand=True)
+        screen.mainloop()
 
-    _create_label_slider(left_panel, "Length Limit", 200, 1001)
-    _create_label_slider(left_panel, "Starting Length", 0.0000001, 1.1)
-    _create_label_slider(left_panel, "Sample Size", 1, 10, 9)
-    _create_label_slider(left_panel, "Starting Thickness", 0, 2)
-    _create_label_slider(left_panel, "Initial Heading", 0, 360)
-    _create_label_slider(left_panel, "Rotation Angle", 0, 360)
-    _create_label_slider(left_panel, "Growth Rate", 0, 1)
+    except ValueError as e:
+        print(e)
 
-    root.mainloop()
-
-def _create_label_slider(left_panel, txt, start, end, step_ct=None):
-    slider_label = ctk.CTkLabel(left_panel, text=txt)
-    slider_label.pack(pady=(20, 0))
-
-    angle_slider = ctk.CTkSlider(left_panel, from_=start, to=end, number_of_steps=step_ct)
-    angle_slider.pack(pady=20)
-
+    except Exception:
+        print("Drawing was terminated.")
 
 if __name__ == "__main__":
     main()

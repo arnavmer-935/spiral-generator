@@ -1,6 +1,5 @@
 import turtle
 from random import sample, choice, uniform, randint, random
-from time import perf_counter
 
 colors = [
     'red', 'orange', 'gold', 'yellow',
@@ -10,12 +9,12 @@ colors = [
 ]
 
 t = turtle.Turtle()
-screen = turtle.Screen()
 
-def setup():
+def setup(screen):
     screen.bgcolor('black')
     t.speed(0)
     t.ht()
+    screen.tracer(0)
 
 def validate_params(
         length_limit,
@@ -104,33 +103,3 @@ def _get_random_args() -> dict[str, float]:
 
     return dict(zip(keys, vals))
 
-def main():
-    try:
-        setup()
-        args = _get_random_args()
-        print("---------RANDOMLY CHOSEN PARAMETERS---------")
-
-        for param, value in args.items():
-            print(f"{param}: {value:.4f}")
-
-        print()
-        start = perf_counter()
-        distance, n_turns = draw_custom_spiral(*args.values()) #sample run
-        end = perf_counter()
-        time_taken = end - start
-
-        print("-------------METRICS----------------")
-        print(f"Distance travelled: {distance:.4f} pixels")
-        print(f"Number of turns during drawing: {n_turns}")
-        print(f"Average drawing speed: {(distance / time_taken):.4f} px/s")
-
-        screen.mainloop()
-
-    except ValueError as e:
-        print(e)
-
-    except Exception:
-        print("Drawing was terminated.")
-
-if __name__ == "__main__":
-    main()
