@@ -2,13 +2,15 @@
 
 A parametric generative art tool built with Python and Turtle. Tweak a handful of numbers and get wildly different geometric art — from tight golden-angle sunflowers to exploding color wheels.
 
-![octagon](screenshots/chaotic_star_spiral.png)
+![chaotic_circle](screenshots/beautiful_golden_chaos.png)
 
-![chaotic](screenshots/octagon_spiral.png)
+![star_spiral](screenshots/chaotic_star_spiral.png)
 
-![triangle_drift](screenshots/starburst_spiral.png)
+![octagon](screenshots/octagon_spiral.png)
 
-![starburst](screenshots/triangular_helix_spiral.png)
+![starburst](screenshots/starburst_spiral.png)
+
+![triangular_helix](screenshots/triangular_helix_spiral.png)
 
 ---
 
